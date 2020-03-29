@@ -12,4 +12,5 @@ public class CategoriaResource {
 	public String Listar() {
 		return "Rest esta funcionando";
 	}
+	
 }
