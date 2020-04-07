@@ -14,6 +14,7 @@ import com.example.cruso1.Repositories.CidadeRepository;
 import com.example.cruso1.Repositories.ClienteRepository;
 import com.example.cruso1.Repositories.EnderecoRepository;
 import com.example.cruso1.Repositories.EstadoRepository;
+import com.example.cruso1.Repositories.ItemPedidoRepository;
 import com.example.cruso1.Repositories.PagamentoRepository;
 import com.example.cruso1.Repositories.PedidoRepository;
 import com.example.cruso1.Repositories.ProdutoRepository;
@@ -22,6 +23,7 @@ import com.example.cruso1.domain.Cidade;
 import com.example.cruso1.domain.Cliente;
 import com.example.cruso1.domain.Endereco;
 import com.example.cruso1.domain.Estado;
+import com.example.cruso1.domain.ItemPedido;
 import com.example.cruso1.domain.Pagamento;
 import com.example.cruso1.domain.PagamentoComBoleto;
 import com.example.cruso1.domain.PagamentoComCartao;
@@ -50,6 +52,10 @@ public class TestConfig implements CommandLineRunner {
 	private PedidoRepository pedido;
 	@Autowired
 	private PagamentoRepository pagamento;
+	@Autowired
+	private ItemPedidoRepository itemPedido;
+	
+	
 	
 	@Override
 	public void run(String... args) throws Exception {
@@ -107,6 +113,19 @@ public class TestConfig implements CommandLineRunner {
 		 
 		 pedido.saveAll(Arrays.asList(ped1,ped2));
 		 pagamento.saveAll(Arrays.asList(pagto1,pagto2));
+		 
+		 ItemPedido ip1 = new ItemPedido(ped1, p1, 0.00, 1, 2000.00);
+		 ItemPedido ip2 = new ItemPedido(ped1, p3, 0.00, 2, 80.00);
+		 ItemPedido ip3 = new ItemPedido(ped2, p2, 100.00, 1, 800.00);
+		 
+		 ped1.getItens().addAll(Arrays.asList(ip1, ip2));
+		 ped2.getItens().addAll(Arrays.asList(ip3));
+		 
+		 p1.getItens().addAll(Arrays.asList(ip1));
+		 p2.getItens().addAll(Arrays.asList(ip3));
+		 p3.getItens().addAll(Arrays.asList(ip2));
+		 
+		 itemPedido.saveAll(Arrays.asList(ip1,ip2,ip3));
 		 
 	}
 
