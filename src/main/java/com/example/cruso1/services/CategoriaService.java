@@ -1,5 +1,6 @@
 package com.example.cruso1.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,11 @@ public class CategoriaService {
 		find(obj.getId());
 		return rep.save(obj);
 	}
+	
+	public List<Categoria> findAll(){
+		return rep.findAll();
+	}
+	
 	
 	public void delete(Integer id) {
 		find(id);
